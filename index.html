@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="app-layout">
+    <header class="app-header">
+      <h1>Student Finance Tracker</h1>
+      <nav aria-label="Main Navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰ Menu</button>
+        <ul id="nav-menu" class="nav-list">
+          <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+          <li><a href="#records" class="nav-link">Records</a></li>
+          <li><a href="#form-section" class="nav-link">Add/Edit Form</a></li>
+          <li><a href="#settings" class="nav-link">Settings</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+      </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="dashboard" class="app-section">
+        <h2>Dashboard </h2>
+        <div class ="stats-grid">
+        <div class="stat-card">
+         <h3>Total Records</h3>
+            <p id="stat-total-records">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Sum</h3>
+            <p id="stat-total-sum">$0.00</p>
+          </div>
+          <div class="stat-card">
+            <h3>Top Category</h3>
+            <p id="stat-top-category">N/A</p>
+          </div>
+          <div class="stat-card budget-card">
+            <h3>Budget Cap</h3>
+            <p id="stat-budget-display">$0.00 / $1,000.00</p>
+            <div class="progress-bar"><div id="budget-fill"></div></div>
+            <div id="budget-live-msg" aria-live="polite" class="sr-only">Budget is under control.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="records" class="app-section">
+        <div class="records-header">
+          <h2>Records</h2>
+          <div class="search-sort-controls">
+            <input type="text" id="search-input" placeholder="Search description, category, or amount..." aria-label="Search records">
+            <button id="sort-btn" aria-label="Sort records">↕ Sort</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="records-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="records-tbody">
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="form-section" class="app-section">
+        <h2 id="form-title">Add New Transaction</h2>
+        <form id="transaction-form" novalidate>
+          <input type="hidden" id="record-id">
+          
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" required placeholder="e.g., Lunch at cafeteria">
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input type="number" id="amount" step="0.01" required placeholder="e.g., 12.50">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" required>
+              <option value="Food">Food</option>
+              <option value="Books">Books</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Fees">Fees</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required>
+          </div>
+
+          <button type="submit" class="btn-primary">Save Transaction</button>
+        </form>
+      </section>
+
+      <section id="settings" class="app-section">
+        <h2>Settings</h2>
+        <div class="settings-card">
+          <label for="budget-cap-input">Monthly Budget Cap ($):</label>
+          <input type="number" id="budget-cap-input" value="1000.00">
+          <button id="save-settings-btn" class="btn-secondary">Update Cap</button>
+        </div>
+        <div class="settings-card export-import" style="margin-top: 1rem;">
+          <h3>Data Management</h3>
+          <button id="export-btn" class="btn-secondary">Export JSON</button>
+          <label class="btn-secondary file-upload-label" style="display:inline-block; margin-left: 0.5rem; cursor:pointer; padding:0.5rem 1rem;">
+            Import JSON <input type="file" id="import-file" accept=".json" hidden>
+          </label>
+        </div>
+      </section>
+
+      <section id="about" class="app-section">
+        <h2>About</h2>
+        <p>Student Finance Tracker built with semantic HTML, responsive CSS, and modular vanilla JavaScript.</p>
+        <p>Developer: Oche Emmanuel Mannix Adukwu | Contact: <a href="mailto:student@alu.edu">student@alu.edu</a></p>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="scripts/app.js"></script>
+</body>
+</html>
+
