@@ -235,7 +235,7 @@ mark{
     *{
         animation: none !important;
         transition: none !important;
-        scroll-behaviour: auto !important;
+        scroll-behavior: auto !important;
     }
 }
 
