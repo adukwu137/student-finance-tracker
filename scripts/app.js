@@ -164,4 +164,33 @@ window.editRecord = function(id) {
   window.scrollTo({ top: document.getElementById('form-section').offsetTop, behavior: 'smooth' });
 };
 
+const BudgetcapInput = document.getElementById('budget-cap');
+const saveSettingsBtn = document.getElementById('save-settings-btn');
+const budgetLiveMsg = document.getElementById('budget-live-msg');
+
+if(saveSettingsBtn && budgetCapInput) {
+  saveSettingsBtn.addEventListener('click', () => {
+    const newCap = parseFloat(budgetCapInput.value);
+    if (!isNaN(newCap) && newCap > 0) {
+      monthlyBudgetCap = newCap;
+      renderDashboard();
+      updateAriaLiveMessage();
+    } else {
+      alert('Please enter a valid positive number for the budget cap.');
+    }
+  });
+}
+
+function updateAriaLiveMessage() {
+    if (budgetLiveMsg) return;
+  const totalSum = transactions.reduce((sum, t) => sum + t.amount, 0);
+  if (totalSum > monthlyBudgetCap) {
+    budgetLiveMsg.textContent = `Warning: Budget cap exceeded by $${(totalSum - monthlyBudgetCap).toFixed(2)}`;
+    } else {
+    budgetLiveMsg.textContent = `Budget is under control. $${(monthlyBudgetCap - totalSum).toFixed(2)} remaining.`;
+  }
+}
+
 initApp();
+
+
