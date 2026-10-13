@@ -191,6 +191,62 @@ function updateAriaLiveMessage() {
   }
 }
 
+const exportBtn = document.getElementById('export-btn');
+const importFile = document.getElementById('import-file');
+const currencySelect = document.getElementById('currency-select');
+
+let currentCurrency = localStorage.getItem('appCurrency') || 'USD';
+if (currencySelect) {
+  currencySelect.value = currentCurrency;
+}
+if (exportBtn) {
+  exportBtn.addEventListener('click', () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(transactions, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `student_finance_backup_${new Date().toISOString().split('T')[0]}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  });
+}
+
+if (importFile) {
+  importFile.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target.result);
+
+        if (Array.isArray(importedData) && importedData.every(item => item.id && item.description && item.amount !== undefined && item.category && item.date)) {
+          transactions = importedData;
+          localStorage.setItem('transactions', JSON.stringify(transactions));
+          renderDashboard();
+          renderTable(transactions);
+          alert('Data imported successfully!');
+          } else {
+          alert('Import failed: JSON file structure is invalid.');
+        }
+        } catch (err) {
+        alert('Import failed: File is not a valid JSON document.');
+      }
+    };
+    reader.readAsText(file);
+  });
+}
+
+if (currencySelect) {
+  currencySelect.addEventListener('change', (e) => {
+    currentCurrency = e.target.value;
+    localStorage.setItem('appCurrency', currentCurrency);
+    renderDashboard();
+    renderTable(transactions);
+  });
+}
+
 initApp();
 
 
