@@ -227,8 +227,8 @@ mark{
 }
 
 @keyframes fadeInHighlight {
-  from { background-color: #FEF08A; }
-  to { background-color: #FDE047; }
+    from { background-color: #FEF08A;}
+    to { background-color: #FDE047;}
 }
 
 @media (prefers-reduced-motion: reduce){

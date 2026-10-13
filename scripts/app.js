@@ -47,10 +47,10 @@ let sortDirection = { column: 'date', asc: false };
 
 const recordsTbody = document.getElementById('records-tbody');
 const searchInput = document.getElementById('search-input');
-const totalRecordsEl = document.getElementById('total-records');
-const totalsumEl = document.getElementById('total-sum');
-const topCategoryEl = document.getElementById('top-category');
-const budgetDisplayEl = document.getElementById('budget-display');
+const totalRecordsEl = document.getElementById('stat-total-records');
+totalsumEl = document.getElementById('stat-total-sum');
+const topCategoryEl = document.getElementById('stat-top-category');
+const budgetDisplayEl = document.getElementById('stat-budget-display');
 const budgetFillEl = document.getElementById('budget-fill');
 
 function initApp() {
@@ -119,7 +119,7 @@ function renderTable(data, regex = null) {
 data.forEach(t => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-    <td>{t.id}</td>
+    <td>${t.id}</td>
     <td>${highlightMatch(t.date, regex)}</td>
     <td>${highlightMatch(t.description, regex)}</td>
     <td>$${t.amount.toFixed(2)}</td>
@@ -164,7 +164,7 @@ window.editRecord = function(id) {
   window.scrollTo({ top: document.getElementById('form-section').offsetTop, behavior: 'smooth' });
 };
 
-const BudgetcapInput = document.getElementById('budget-cap');
+const budgetcapInput = document.getElementById('budget-cap');
 const saveSettingsBtn = document.getElementById('save-settings-btn');
 const budgetLiveMsg = document.getElementById('budget-live-msg');
 
@@ -182,7 +182,7 @@ if(saveSettingsBtn && budgetCapInput) {
 }
 
 function updateAriaLiveMessage() {
-    if (budgetLiveMsg) return;
+    if (!budgetLiveMsg) return;
   const totalSum = transactions.reduce((sum, t) => sum + t.amount, 0);
   if (totalSum > monthlyBudgetCap) {
     budgetLiveMsg.textContent = `Warning: Budget cap exceeded by $${(totalSum - monthlyBudgetCap).toFixed(2)}`;
