@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assertion Test Suites</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+<body style="padding: 2rem; background-color: #F3F4F6;">
+    <h1>Assertion Test Suites</h1>
+    <ul id="test-output" style="font-family: monospace; font-size: 1.1rem; line-height: 2;"></ul>
+<script type ="module">
+    import { validators } from './scripts/app.js';
+    const output = document.getElementById('test-output');
+
+    function assert(testName, condition, message) {
+        const li = document.createElement('li');
+        li.textContent = `${testName} -> ${condition ? 'PASSED' : 'FAILED'}`;
+        li.style.color = condition ? '#059669' : '#DC2626';
+        output.appendChild(li);
+    }
+    assert('Advanced Regex: Valid Description ("Lunch at ALU")', validators.isValidDescription('Lunch at ALU'));
+    assert('Advanced Regex: Invalid Description ("ab" - too short)', !validators.isValidDescription('ab'));
+    assert('Rule 2: Valid Amount (25.50)', validators.isValidAmount('25.50'));
+    assert('Rule 2: Invalid Amount (-10)', !validators.isValidAmount(-10));
+    assert('Rule 3: Valid Date ("2026-10-13")', validators.isValidDate('2026-10-13'));
+    assert('Rule 4: Valid Category ("Food")', validators.isValidCategory('Food'));
+    assert('Rule 4: Invalid Category ("Unknown")', !validators.isValidCategory('Unknown'));
+  </script>
+</body>
+</html>
+
+
+
+
