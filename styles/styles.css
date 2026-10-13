@@ -206,3 +206,37 @@ th { background-color: var(--bg-color); font-weight: 600; }
 @media (min-width: 1024px) {
   .stats-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+:focus-visible {
+  outline: 3px solid #059669;
+  outline-offset: 2px;
+}
+
+button, input, select, .card{
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+mark{
+    border-radius: 2px;
+  animation: fadeInHighlight 0.3s ease-in-out;
+}
+
+@keyframes fadeInHighlight {
+  from { background-color: #FEF08A; }
+  to { background-color: #FDE047; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation: none !important;
+        transition: none !important;
+        scroll-behaviour: auto !important;
+    }
+}
+
+
